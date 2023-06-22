@@ -17,9 +17,9 @@ node{
     stage('4-upload-2-nexus'){
         sh "${mavenHome}/bin/mvn deploy"
     }
-    stage('deploy-dmissibi'){
+    stage('deploy-dmissibi01'){
         sh "echo 'deploy to dmissibi environment'"
-        deploy adapters: [tomcat9(credentialsId: 'tomcat-deployer', path: '', url: 'http://54.211.209.180:8009/')], contextPath: 'dmissibi', war: 'target/*.war'
+        deploy adapters: [tomcat9(credentialsId: 'tomcat-deployer', path: '', url: 'http://52.90.105.79:8009/')], contextPath: 'dmissibi01', war: 'target/*.war'
     }
 
     stage('approvalgate'){
@@ -32,8 +32,8 @@ node{
 
     }
 
-    stage('deploy-to-staging'){
-        deploy adapters: [tomcat9(credentialsId: 'tomcat-deployer', path: '', url: 'http://54.211.209.180:8009/')], contextPath: 'stagging', war: 'target/*.war'
+    stage('deploy-to-staging01'){
+        deploy adapters: [tomcat9(credentialsId: 'tomcat-deployer', path: '', url: 'http://52.90.105.79:8009/')], contextPath: 'staging01', war: 'target/*.war'
     }
 
     stage('approvalgate'){
@@ -46,7 +46,7 @@ node{
 
  stage('deploy to prod'){
 
-    deploy adapters: [tomcat9(credentialsId: 'tomcat-deployer', path: '', url: 'http://54.211.209.180:8009/')], contextPath: 'production', war: 'target/*.war'
+    ddeploy adapters: [tomcat9(credentialsId: 'tomcat-deployer', path: '', url: 'http://52.90.105.79:8009/')], contextPath: 'production', war: 'target/*.war'
  }
 
  stage('send ms teams notification'){
